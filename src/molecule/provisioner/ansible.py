@@ -496,6 +496,9 @@ class Ansible(base.Base):
                     ),
                 ),
             )
+        for role in roles_path_list:
+            print('role')
+            print(role)
 
         roles_path_list = [
             util.abs_path(
