@@ -496,10 +496,14 @@ class Ansible(base.Base):
                     ),
                 ),
             )
-        for role in roles_path_list:
-            print('role')
-            print(role)
-
+        print('runtime cache dir')
+        print(util.abs_path(os.path.join(self._config.scenario.config.runtime.cache_dir, "roles")))
+        print('runtime ephemeral_directory dir')
+        print(os.path.join(self._config.scenario.ephemeral_directory, "roles"))
+        print('runtime pardir')
+        print(util.abs_path(os.path.join(self._config.project_directory, os.path.pardir)))
+        print('runtime expand')
+        print(util.abs_path(os.path.join(os.path.expanduser("~"), ".ansible", "roles")))
         roles_path_list = [
             util.abs_path(
                 os.path.join(self._config.scenario.config.runtime.cache_dir, "roles"),
@@ -517,6 +521,9 @@ class Ansible(base.Base):
             roles_path_list.extend(
                 list(map(util.abs_path, os.environ["ANSIBLE_ROLES_PATH"].split(":"))),
             )
+        for role in roles_path_list:
+            print('role')
+            print(role)
 
         env = util.merge_dicts(
             os.environ,
